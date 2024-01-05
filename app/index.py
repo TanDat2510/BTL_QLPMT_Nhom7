@@ -26,6 +26,14 @@ def common_resp():
         'cart': utils.count_cart(session.get('cart'))
     }
 
+@app.route('/booking')
+def booking_from():
+    return render_template('booking.html')
+
+@app.route('/login')
+def login_from():
+    return render_template('login.html')
+
 
 @app.route('/api/cart', methods=['post'])
 def add_cart():
