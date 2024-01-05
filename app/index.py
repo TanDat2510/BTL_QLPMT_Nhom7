@@ -34,6 +34,27 @@ def booking_from():
 def login_from():
     return render_template('login.html')
 
+@app.route('/rigister', methods=['get','post'])
+def user_rigister():
+    err_msg = ""
+    if request.method.__eq__('POST'):
+        password = request.form.get('password')
+        confirm = request.form.get('confirm')
+
+        if password.__eq__(confirm):
+            try:
+                dao.add_user(name=request.form.get('name'),
+                             username=request.form.get('username'),
+                             password=password)
+            except Exception as ex:
+                print(str(ex))
+                err_msg = 'Hệ thống đang bị lỗi!'
+            else:
+                return redirect('/login')
+        else:
+            err_msg = 'Mật khẩu KHÔNG khớp!'
+
+    return render_template('/rigister.html', err_msg=err_msg)
 
 @app.route('/api/cart', methods=['post'])
 def add_cart():
