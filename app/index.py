@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, session, jsonify
 import dao
 import utils
 from app import app, login
-from flask_login import login_user
+from flask_login import login_user,logout_user
 import math
 
 
@@ -30,9 +30,21 @@ def common_resp():
 def booking_from():
     return render_template('booking.html')
 
-@app.route('/login')
-def login_from():
-    return render_template('login.html')
+@app.route('/login', methods=['get','post'])
+def user_singin():
+    err_msg = ""
+    if request.method.__eq__('POST'):
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = dao.auth_user(username=username, password=password)
+        if user:
+            login_user(user=user)
+            next = request.args.get('next')
+            return redirect('/' if next is None else next)
+        else:
+            err_msg = "Tài khoản hoặc mật khẩu KHÔNG chính xác!!!"
+
+    return render_template('login.html',err_msg=err_msg)
 
 @app.route('/rigister', methods=['get','post'])
 def user_rigister():
@@ -122,6 +134,10 @@ def cart_list():
 def get_user(user_id):
     return dao.get_user_by_id(user_id)
 
+@app.route('/logout')
+def process_use_logout():
+    logout_user()
+    return redirect("/login")
 
 if __name__ == '__main__':
     from app import admin

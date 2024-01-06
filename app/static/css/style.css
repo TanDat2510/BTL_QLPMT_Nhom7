@@ -1656,6 +1656,15 @@ display: inline-block;
 float: right;
 }
 
+.aco{
+background: #3721ff;
+padding: 9px 46px !important;
+margin-top: 3px;
+border-radius: 6px;
+display: inline-block;
+float: right;
+}
+
 .buy:hover {
 	color: #fff;
 }

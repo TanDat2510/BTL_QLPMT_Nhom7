@@ -1,9 +1,15 @@
+{% if err_msg %}
+<div class="alert alert-danger">
+	<h4>{{ err_msg }}</h4>
+</div>
+{% endif %}
+
 <!doctype html>
 <html lang="en">
-  <head>
-  	<title>Đăng Nhập</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+	<title>Đăng Nhập</title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
@@ -11,72 +17,73 @@
 
 	<link rel="stylesheet" href="static/css/stylelogin.css">
 
-	</head>
-	<body>
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Đăng Nhập</h2>
-				</div>
+</head>
+<body>
+<section class="ftco-section">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6 text-center mb-5">
+				<h2 class="heading-section">Đăng Nhập</h2>
 			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-12 col-lg-10">
-					<div class="wrap d-md-flex">
-						<div class="img" style="background-image: url(static/images/vantan.jpg);">
-			      </div>
-						<div class="login-wrap p-4 p-md-5">
-			      	<div class="d-flex">
-			      		<div class="w-100">
-			      			<h3 class="mb-4">Đăng Nhập</h3>
-			      		</div>
-								<div class="w-100">
-									<p class="social-media d-flex justify-content-end">
-										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
-										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
-									</p>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-md-12 col-lg-10">
+				<div class="wrap d-md-flex">
+					<div class="img" style="background-image: url(static/images/banner-callus.jpg);">
+					</div>
+					<div class="login-wrap p-4 p-md-5">
+						<div class="d-flex">
+							<div class="w-100">
+								<h3 class="mb-4">Đăng Nhập</h3>
+							</div>
+							<div class="w-100">
+								<p class="social-media d-flex justify-content-end">
+									<a class="social-icon d-flex align-items-center justify-content-center" href="#"><span class="fa fa-facebook"></span></a>
+									<a class="social-icon d-flex align-items-center justify-content-center" href="#"><span class="fa fa-twitter"></span></a>
+								</p>
+							</div>
+						</div>
+						<form action="" class="signin-form" method="post">
+							<div class="form-group mb-3">
+								<label class="label" for="username">Tài khoản</label>
+								<input class="form-control" id="username" name="username" placeholder="Nhập tài khoản"
+									   required type="text">
+							</div>
+							<div class="form-group mb-3">
+								<label class="label" for="password">Mật khẩu</label>
+								<input class="form-control" id="password" name="password" placeholder="Nhập mật khẩu"
+									   required type="password">
+							</div>
+							<div class="form-group">
+								<button class="form-control btn btn-primary rounded submit px-3" type="submit">Đăng
+									Nhập
+								</button>
+							</div>
+							<div class="form-group d-md-flex">
+								<div class="w-50 text-left">
+									<label class="checkbox-wrap checkbox-primary mb-0">Lưu mật khẩu
+										<input checked type="checkbox">
+										<span class="checkmark"></span>
+									</label>
 								</div>
-			      	</div>
-							<form action="#" class="signin-form">
-			      		<div class="form-group mb-3">
-			      			<label class="label" for="username">Tài khoản</label>
-			      			<input type="text" class="form-control" placeholder="Nhập tài khoản" required>
-			      		</div>
-		            <div class="form-group mb-3">
-		            	<label class="label" for="password">Mật khẩu</label>
-		              <input type="password" class="form-control" placeholder="Nhập mật khẩu" required>
-		            </div>
-		            <div class="form-group">
-		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Đăng Nhập</button>
-		            </div>
-		            <div class="form-group d-md-flex">
-		            	<div class="w-50 text-left">
-			            	<label class="checkbox-wrap checkbox-primary mb-0">Lưu mật khẩu
-									  <input type="checkbox" checked>
-									  <span class="checkmark"></span>
-										</label>
-									</div>
-									<div class="w-50 text-md-right">
-										<a href="#">Quên mật khẩu</a>
-									</div>
-		            </div>
-		          </form>
-					<p class="text-center">Chưa đăng ký? <a data-toggle="tab" href="{{ url_for('user_rigister') }}">Đăng Ký</a></p>
-<!--					<li class="nav-item">-->
-<!--						<a class="nav-link text-center"> <a data-toggle="tab" href="{{ url_for('user_rigister') }}">Đăng Ký</a></a>-->
-<!--					</li>-->
-		        </div>
-		      </div>
+								<div class="w-50 text-md-right">
+									<a href="#">Quên mật khẩu</a>
+								</div>
+							</div>
+						</form>
+						<p class="text-center">Chưa đăng ký? <a data-toggle="tab" href="/rigister">Đăng Ký</a></p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
-	<script src="js/jquery.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
 
-	</body>
+</body>
 </html>
 
