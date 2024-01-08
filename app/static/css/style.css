@@ -211,7 +211,7 @@ button {
 
 .full {
 	float: left;
-	width: 100%;
+	width:100%;
 }
 
 .layout_padding {
@@ -237,7 +237,7 @@ button {
 }
 
 .full {
-	width: 100%;
+	width: 370px;
 	float: left;
 	margin: 0;
 	padding: 0;
