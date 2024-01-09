@@ -1,10 +1,8 @@
-from datetime import datetime
-
-from flask_login import UserMixin
 from sqlalchemy import Column, String, Integer, Boolean, DateTime, Float, ForeignKey, Date
 from sqlalchemy.orm import relationship
-
 from app import db
+from datetime import datetime
+from flask_login import UserMixin
 import hashlib
 
 
@@ -13,7 +11,7 @@ class Account(db.Model, UserMixin):
     email = Column(String(50), unique=True)
     password = Column(String(255))
     name = Column(String(50))
-    avatar = Column(String(255), default="https://cdn-icons-png.flaticon.com/512/3177/3177440.png")
+    avatar = Column(String(255),default="https://cdn-icons-png.flaticon.com/512/3177/3177440.png")
 
     type = Column(String(50), default="user")
     __mapper_args__ = {
@@ -23,7 +21,6 @@ class Account(db.Model, UserMixin):
 
     def __str__(self):
         return self.id
-
 
 class Doctor(Account):
     id = Column(Integer, ForeignKey(Account.id), primary_key=True)
@@ -36,7 +33,6 @@ class Doctor(Account):
 
     def __str__(self):
         return self.name
-
 
 class Administrator(Account):
     id = Column(Integer, ForeignKey(Account.id), primary_key=True)
@@ -58,10 +54,11 @@ class Patient(Account):
     gioiTinh = Column(String(50))
     sdt = Column(String(50))
     joined_date = Column(DateTime, default=datetime.now())
-    # active = Column(Boolean, default=False)
+    #active = Column(Boolean, default=False)
     books = relationship('Books', cascade="all,delete", backref='patient', lazy=True)
     medical_forms = relationship('MedicalForm', backref='patient', lazy=True)
     receipts = relationship('Receipt', backref='patient', lazy=True)
+
 
     __mapper_args__ = {
         'polymorphic_identity': 'patient'
@@ -104,11 +101,10 @@ class Time(db.Model):
     def __str__(self):
         return self.period
 
-
 class Books(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     booked_date = Column(Date, default=datetime.now().date())
-    patient_id = Column(Integer, ForeignKey(Patient.id, onupdate="CASCADE", ondelete="CASCADE"), nullable=False)
+    patient_id = Column(Integer, ForeignKey(Patient.id,  onupdate="CASCADE", ondelete="CASCADE"), nullable=False)
     time_id = Column(Integer, ForeignKey(Time.id), nullable=False)
     desc = Column(String(500))
     lenLichKham = Column(Boolean, default=False)
@@ -132,7 +128,6 @@ class Medicine(db.Model):
     def __str__(self):
         return self.name
 
-
 class MedicalForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     date = Column(Date, default=datetime.now().date())
@@ -141,7 +136,6 @@ class MedicalForm(db.Model):
     doctor_id = Column(Integer, ForeignKey(Doctor.id), nullable=False)
     patient_id = Column(Integer, ForeignKey(Patient.id), nullable=False)
     prescription = relationship('Prescription', backref='medicalForm', lazy=True)
-    is_lapphieu = Column(Boolean, default=False)
 
     def __repr__(self):
         return f"<YourModel(booked_date='{self.booked_date.strftime('%Y-%m-%d')}')>"
@@ -150,7 +144,7 @@ class MedicalForm(db.Model):
         return Patient.query.get(self.patient_id).name
 
 
-class Prescription(db.Model):  # Đơn thuốc
+class Prescription(db.Model):               #Đơn thuốc
     id = Column(Integer, primary_key=True, autoincrement=True)
     medicine_id = Column(Integer, ForeignKey(Medicine.id), nullable=False)
     quantity = Column(Integer, default=0)
@@ -196,26 +190,20 @@ class Rules(db.Model):
     value = Column(Integer, nullable=False)
     admin_id = Column(Integer, ForeignKey(Administrator.id), nullable=False)
 
+    def __repr__(self):
+        return f"<YourModel(booked_date='{self.booked_date.strftime('%Y-%m-%d')}')>"
+
+
 
 if __name__ == "__main__":
     from app import app
-
     with app.app_context():
         db.create_all()
-
-        # r1 = Rules(name="quantity_patient", value=40, admin_id=1)
-        # r2 = Rules(name="Số thuốc", value=30, admin_id=1)
-        # r3 = Rules(name="tienkham", value=100000, admin_id=1)
-        #
-        # db.session.add(r1)
-        # db.session.add(r2)
-        # db.session.add(r3)
-        # db.session.commit()
 
         a = Administrator(name='Le Tan Dat', email='tandat@gmail.com',
                     password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()), type="administrator", joined_date="07/10/2022")
 
-        d = Doctor(name='Le Van Tan', email='vatan@gmail.com',
+        d = Doctor(name='Le Van Tan', email='vantan@gmail.com',
                     password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()), type="doctor", ngayVaoLam="14/11/2022")
 
         p = Patient(name='Trinh Tong Hiep', email='tonghiep@gmail.com',
@@ -225,7 +213,7 @@ if __name__ == "__main__":
         p2 = Patient(name='Nguyen Huy Tan', email='huytan@gmail.com',
                     password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()), type="patient",
                     diaChi='124 LeVanLuong, Nha Be, HCM', namSinh="2003", gioiTinh='Nam', sdt="0987654321")
-        n = Nurse (name='Le Van Tan', email='vantan@gmail.com',
+        n = Nurse (name='Truong Dinh Nhat Cuong ', email='nhatcuong@gmail.com',
                    password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()), type="nurse")
 
         c = Cashier(name='Nguyen Nhu Phong', email='nhuphong@gmail.com',
@@ -283,7 +271,7 @@ if __name__ == "__main__":
 
 
         # patients = []
-
+        #
         # for i in range(1, 41):
         #     name = f'Trinh Tong Hiep_{i}'
         #     email = f'tonghiep{i}@gmail.com'
@@ -294,9 +282,19 @@ if __name__ == "__main__":
         #     db.session.add(patient)
         #
         # db.session.commit()
-
-
+        #
+        #
         # for i in range(7, 47):
         #     b = Books(patient_id=i, booked_date='2024-01-07', time_id=1, lenLichKham=False, isKham=False)
         #     db.session.add(b)
+        #
+        # db.session.commit()
+        #
+        # r1 = Rules(name="quantity_patient", value=40, admin_id=1)
+        # r2 = Rules(name="Số thuốc", value=30, admin_id=1)
+        # r3 = Rules(name="tienkham", value=100000, admin_id=1)
+        #
+        # db.session.add(r1)
+        # db.session.add(r2)
+        # db.session.add(r3)
         # db.session.commit()
