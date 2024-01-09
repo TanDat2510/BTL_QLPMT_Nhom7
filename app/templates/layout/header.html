@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         {% if current_user.is_authenticated %}
-                        <li><a class="aco" href="#">xin chào {{current_user.username}}</a></li>
+                        <li><a class="aco" href="#">xin chào {{current_user.name}}</a></li>
                         {% endif %}
                     </div>
 
@@ -40,7 +40,7 @@
                                     <li class="active"><a href="#">Trang chủ</a></li>
                                     <li><a href="#">về chúng tôi</a></li>
                                     {% if current_user.is_authenticated %}
-                                    <li><a href="/booking">đăng kí lịch khám</a></li>
+                                    <li><a href="/booking-form">đăng kí lịch khám</a></li>
                                     {% else %}
                                     <li><a  href="/login">Đăng kí lịch khám</a></li>
                                     {% endif %}
