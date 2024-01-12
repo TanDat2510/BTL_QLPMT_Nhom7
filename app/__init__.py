@@ -13,6 +13,14 @@ app.secret_key = '@#$%^&#@$%^$%^&*@#$%^&43567*#$%^&*'
 #app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:%s@localhost/qlpmt_db?charset=utf8mb4' % quote('Nhatcuong123@')
 app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:%s@localhost/clinic?charset=utf8mb4' % quote('Tandat25102003')
 
+
+app.config['CART_KEY'] = 'cart'
+app.config['DATE_KEY'] = 'date'
+app.config['ORDERER_KEY'] = 'orderer'
+app.config['DETAILS_KEY'] = 'details'
+app.config['S_INFO_KEY'] = 'info'
+app.config['S_DETAILS_KEY'] = 's_details'
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
 cloudinary.config(

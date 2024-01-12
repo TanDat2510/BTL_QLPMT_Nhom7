@@ -4,7 +4,7 @@ import requests
 from flask import Flask, render_template, request, redirect, jsonify
 from flask import request
 from sqlalchemy import Float
-from app import dao, login, utils
+from app import dao, login, utils, send_mail
 from app import app, db
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models import Books, MedicalForm, Prescription
@@ -52,6 +52,9 @@ def add_booking():
     time = data.get('time_id')
     try:
         b = dao.add_booking(desc=desc, date=date, time=time)
+        a = dao.email(current_user.id)
+        email = a.email
+        send_mail.send(email, date, dao.time(time).period)
     except  Exception as e:
         print(str(e))
         return {'status': 404, 'err_msg': 'Chương trình đang bị lỗi'}

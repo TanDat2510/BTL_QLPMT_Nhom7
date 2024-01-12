@@ -150,6 +150,13 @@ def add_prescription( medicine, quantity, guide, id):
     db.session.commit()
 
 
+def email(id):
+    a = Account.query.filter_by(id=id).first()
+    return a
+
+def time(id):
+    t = Time.query.filter_by(id=id).first()
+    return t
 
 def sms(id):
     # b = Books.query.filter_by(id=id).first()
