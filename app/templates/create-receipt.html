@@ -9,15 +9,16 @@
         <div class="container">
             <div class="row">
                 <div class="booking-form">
-                    <form id="bookForm" name="bookForm" method='post' action="/MedicalForm/{{ m }}">
-<!--                        method='post' action="/create-receipt" -->
+                    <form action="/MedicalForm/{{ m }}" id="bookForm" method='post' name="bookForm">
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <span class="form-label">Bệnh nhân</span>
                                     {% for l in lapphieukham %}
-                                    <input value="{{ l[4] }}" disabled class="d-none" name="patient_id" id="patient_id"></input>
-                                    <span class="form-label" name="medicine_name" id="medicine_name">
+                                    <input class="d-none" disabled id="patient_id" name="patient_id"
+                                           value="{{ l[4] }}"> </input>
+                                    <span class="form-label" id="medicine_name" name="medicine_name">
                                         {% if l[4] == p %}
                                             {{ l[0] }}
                                         {% endif %}
@@ -29,26 +30,28 @@
                             <div class="form-group">
                                 <span class="form-label">Tiền thuốc</span>
                                 {% for l in lapphieukham %}
-                                        {% if l[4] == p %}
-                                <input class="form-label" disabled value="{{ l[3] }}" name="medicine_price" id="medicine_price">
+                                {% if l[4] == p %}
+                                <input class="form-label" disabled id="medicine_price" name="medicine_price"
+                                       value="{{ l[3] }}">
                                 {% endif %}
                                 {% endfor %}
                             </div>
                             <div class="form-group">
                                 <span class="form-label">Tiền khám</span>
-                                <input class="form-label" disabled value="{{ tienkham }}" name="examines_price" id="examines_price">
+                                <input class="form-label" disabled id="examines_price" name="examines_price"
+                                       value="{{ tienkham }}">
 
                             </div>
                             <div class="form-group">
                                 <span class="form-label">Tổng tiền</span>
                                 {% for l in lapphieukham %}
-                                    {% if l[4] == p %}
-                                <input value="{{ l[3] + tienkham}}" disabled class="form-label" name="total" id="total">
+                                {% if l[4] == p %}
+                                <input class="form-label" disabled id="total" name="total" value="{{ l[3] + tienkham}}">
                                 {% endif %}
-                                    {% endfor %}
+                                {% endfor %}
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+                                <button class="btn btn-primary" type="submit">Xác nhận thanh toán</button>
                             </div>
                     </form>
 

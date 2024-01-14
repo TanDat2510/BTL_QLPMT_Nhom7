@@ -198,8 +198,8 @@ class Rules(db.Model):
 if __name__ == "__main__":
     from app import app
     with app.app_context():
-        # db.create_all()
-        #
+        db.create_all()
+
         # a = Administrator(name='Le Tan Dat', email='tandat@gmail.com',
         #             password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()), type="administrator", joined_date="07/10/2022")
         #
@@ -219,6 +219,12 @@ if __name__ == "__main__":
         # c = Cashier(name='Nguyen Nhu Phong', email='nhuphong@gmail.com',
         #             password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()), type="cashier")
         #
+        c2 = Cashier(name='Nguyen Van B', email='VanB@gmail.com',
+                     password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()), type="cashier")
+
+        db.session.add(c2)
+        db.session.commit()
+
         #
         # db.session.add(a)
         # db.session.add(d)
@@ -255,25 +261,44 @@ if __name__ == "__main__":
         # db.session.add(t11)
         #
         # db.session.commit()
+        #
+        # m1 = Medicine(name='Panadol', unit='Vỉ', price=25000, usage='Thuốc giảm đau, hạ sốt')
+        # m2 = Medicine(name='Becberin', unit='Lọ', price=20000, usage='Thuốc tiêu hóa')
+        # m3 = Medicine(name='Paracetamol', unit='Vỉ', price=30000, usage='Thuốc hạ sốt, cảm cúm')
+        # m4 = Medicine(name='Thuốc ho Prospan', unit='Chai', price=30000, usage='Thuốc giảm ho, trị ho dai ho có đờm')
+        #
+        # db.session.add(m1)
+        # db.session.add(m2)
+        # db.session.add(m3)
+        # db.session.add(m4)
+        # db.session.commit()
+        #
+        #
+        #
+        # r1 = Rules(name="quantity_patient", value=40, admin_id=1)
+        # r2 = Rules(name="Số thuốc", value=30, admin_id=1)
+        # r3 = Rules(name="tienkham", value=100000, admin_id=1)
+        #
+        # db.session.add(r1)
+        # db.session.add(r2)
+        # db.session.add(r3)
+        # db.session.commit()
+        # patients = []
+        #
+        # for i in range(8, 41):
+        #     name = f'Trinh Tong Hiep_{i}'
+        #     email = f'tonghiep{i}@gmail.com'
+        #     password = str(hashlib.md5('123456'.encode('utf-8')).hexdigest())
+        #     type = 'patient'
+        #     sdt = f'0123456789{i}'
+        #     patient = Patient(name=name, email=email, password=password, type=type, sdt=sdt)
+        #     db.session.add(patient)
+        #
+        # db.session.commit()
 
-        m1 = Medicine(name='Panadol', unit='Vỉ', price=25000, usage='Thuốc giảm đau, hạ sốt')
-        m2 = Medicine(name='Becberin', unit='Lọ', price=20000, usage='Thuốc tiêu hóa')
-        m3 = Medicine(name='Paracetamol', unit='Vỉ', price=30000, usage='Thuốc hạ sốt, cảm cúm')
-        m4 = Medicine(name='Thuốc ho Prospan', unit='Chai', price=30000, usage='Thuốc giảm ho, trị ho dai ho có đờm')
 
-        db.session.add(m1)
-        db.session.add(m2)
-        db.session.add(m3)
-        db.session.add(m4)
-        db.session.commit()
-
-
-
-        r1 = Rules(name="quantity_patient", value=40, admin_id=1)
-        r2 = Rules(name="Số thuốc", value=30, admin_id=1)
-        r3 = Rules(name="tienkham", value=100000, admin_id=1)
-
-        db.session.add(r1)
-        db.session.add(r2)
-        db.session.add(r3)
-        db.session.commit()
+        # for i in range(10, 40):
+        #     b = Books(patient_id=i, booked_date='2024-01-09', time_id=1,desc_id='benh', lenLichKham=False, isKham=False)
+        #     db.session.add(b)
+        #
+        # db.session.commit()

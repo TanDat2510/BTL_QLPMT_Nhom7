@@ -100,6 +100,7 @@ def process_logout_user():
     return redirect("/login")
 
 
+
 @app.route('/register', methods=['get', 'post'])
 def register_user():
     err_msg = ""
@@ -159,7 +160,7 @@ def check_patient_count():
 def len_ds():
     data = request.json
     id = str(data.get('id'))
-    dao.sms(id)
+    # dao.sms(id)
     dao.lenlichkham(id)
     return jsonify({"message": "Đã lên lịch khám cho bệnh nhân"})
 
@@ -180,6 +181,7 @@ def phieukham(id):
 
 @app.route('/books', methods=['get', 'post'])
 def phieukhamabc():
+    err_msg = ""
     if request.method.__eq__('POST'):
         patient_id = request.form.get('p_id'),
         description = request.form.get('description')
@@ -195,7 +197,7 @@ def phieukhamabc():
         else:
             err_msg = "Cập nhật thành công"
             return redirect('/patient-list')
-    return render_template('phieukham.html', p=patient_id, medicine=dao.load_medicine())
+    return render_template('phieukham.html', p=patient_id, medicine=dao.load_medicine(),err_msg=err_msg)
 @app.route('/len-pk', methods=['post'])
 def len_pk():
     return render_template('phieukham.html')
@@ -224,8 +226,7 @@ def book_offline():
 def medicalform_list():
     lapphieukham = utils.get_info_medical_form()
     tienkham = dao.load_examines_price()
-    return render_template('phieukham-list.html'
-                           , lapphieukham=lapphieukham, tienkham=tienkham)
+    return render_template('phieukham-list.html', lapphieukham=lapphieukham, tienkham=tienkham)
 
 
 
@@ -266,31 +267,31 @@ def Payment():
             err_msg = "Thanh toán thành công"
     return render_template(template_name_or_list='receipt_list.html')
 
-#
-# @app.route('/api/receipt-form', methods=['post'])
-# def Payment():
-#     data = request.json
-#     examines_price = data.get('examines_price')
-#     total = data.get('total')
-#     patient_id = data.get('patient_id')
-#     try:
-#         examines_price = Float(examines_price)
-#         total = Float(total)
-#     except (ValueError, TypeError):
-#         examines_price = None
-#         total = None
-#     try:
-#         b = dao.add_receipt(patient_id=patient_id, examines_price=examines_price, total=total)
-#     except  Exception as e:
-#         print(str(e))
-#         return {'status': 404, 'err_msg': 'Chương trình đang bị lỗi'}
-#
-#     return {'status': 201, 'receipt': {
-#         'patient_id': b.patient_id,
-#         'examines_price': b.examines_price,
-#         'total': b.total
-#         }
-#     }
+
+@app.route('/api/receipt-form', methods=['post'])
+def Payment_A():
+    data = request.json
+    examines_price = data.get('examines_price')
+    total = data.get('total')
+    patient_id = data.get('patient_id')
+    try:
+        examines_price = Float(examines_price)
+        total = Float(total)
+    except (ValueError, TypeError):
+        examines_price = None
+        total = None
+    try:
+        b = dao.add_receipt(patient_id=patient_id, examines_price=examines_price, total=total)
+    except  Exception as e:
+        print(str(e))
+        return {'status': 404, 'err_msg': 'Chương trình đang bị lỗi'}
+
+    return {'status': 201, 'receipt': {
+        'patient_id': b.patient_id,
+        'examines_price': b.examines_price,
+        'total': b.total
+        }
+    }
 
 
 if __name__ == '__main__':

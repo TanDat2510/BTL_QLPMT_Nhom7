@@ -100,7 +100,20 @@ class RulesView(AuthenticatedAdmin):
 class AdminView(AuthenticatedAdmin):
     column_list = ['name', 'joined_date']
 
+
 class MyStatsView(AuthenticatedAdmin2):
+    @expose("/")
+    def index(self):
+        return self.render('admin/stats.html')
+
+class MyLogoutView(BaseView):
+    @expose('/')
+    def index(self):
+        logout_user()
+        return redirect('/admin')
+
+
+class MyStatsView(BaseView):
     @expose('/')
     def index(self):
         month = request.args.get('month')
@@ -109,7 +122,8 @@ class MyStatsView(AuthenticatedAdmin2):
                            doanhthu=dao.doanh_thu_thang(month=month))
 
 
-class TanSuatKham(AuthenticatedAdmin2):
+
+class TanSuatKham(BaseView):
     @expose('/')
     def index(self):
         month = request.args.get('month')
@@ -119,7 +133,7 @@ class TanSuatKham(AuthenticatedAdmin2):
 
 
 
-class TanSuatThuoc(AuthenticatedAdmin2):
+class TanSuatThuoc(BaseView):
     @expose('/')
     def index(self):
         month = request.args.get('month')
@@ -127,11 +141,29 @@ class TanSuatThuoc(AuthenticatedAdmin2):
         return self.render('admin/sudungthuoc.html',
                            tanSuatThuoc=dao.su_dung_thuoc(month=month))
 
-class MyLogoutView(BaseView):
-    @expose('/')
-    def index(self):
-        logout_user()
-        return redirect('/admin')
+# class TanSuatKham(AuthenticatedAdmin2):
+#     @expose('/')
+#     def index(self):
+#         month = request.args.get('month')
+#
+#         return self.render('admin/tansuatkham.html',
+#                            tanSuatKham=dao.tan_suat_kham(month=month))
+#
+#
+#
+# class TanSuatThuoc(AuthenticatedAdmin2):
+#     @expose('/')
+#     def index(self):
+#         month = request.args.get('month')
+#
+#         return self.render('admin/sudungthuoc.html',
+#                            tanSuatThuoc=dao.su_dung_thuoc(month=month))
+
+# class MyLogoutView(BaseView):
+#     @expose('/')
+#     def index(self):
+#         logout_user()
+#         return redirect('/admin')
 
 
 

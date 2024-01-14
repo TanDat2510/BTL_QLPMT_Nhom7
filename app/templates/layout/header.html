@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             {% if current_user.is_authenticated %}
-                            <li><a class="aco" href="#">xin chào {{current_user.name}}</a></li>
+                            <li><a class="aco" href="/info"><img width="30px" src="{{ current_user.avatar }}"> {{current_user.name}}</a></li>
                             {% endif %}
                         </div>
 
@@ -26,10 +26,10 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col logo_section">
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col logo_section">
                         <div class="full">
                             <div class="center-desk">
-                                <div class="logo"><a href="index.html"><img alt="logo" height="100px" src="static/images/logoDHM.jpg"
+                                <div class="logo"><a href="index.html"><img alt="logo" height="100px" src="/static/images/logoDHM.jpg"
                                                                             width="100px"/></a>
                                 </div>
                             </div>
@@ -40,21 +40,20 @@
                             <div class="limit-box">
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
-                                        <li class="active"><a href="#">Trang chủ</a></li>
+                                        <li class="active"><a href="/">Trang chủ</a></li>
                                         <li><a href="#">về chúng tôi</a></li>
                                         {% if current_user.is_authenticated %}
                                         <li><a href="/booking-form">Đăng kí lịch khám</a></li>
                                         {% else %}
                                         <li><a href="/login">Đặt lịch khám</a></li>
                                         {% endif %}
-                                        <li><a href="/contact">liên hệ</a></li>
-
+                                        <li><a href="#">liên hệ</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
                         {% if current_user.is_authenticated %}
                         <li><a class="buy" href="/logout">Đăng Xuất</a></li>
                         {% else %}

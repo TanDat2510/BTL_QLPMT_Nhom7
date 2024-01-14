@@ -6,7 +6,7 @@
 
 {% if current_user.is_authenticated %}
 <section>
-    <div id="booking" class="section">
+    <div class="section" id="booking">
         <div class="section-center">
             <div class="container">
                 <div class="row">
@@ -17,23 +17,23 @@
                         <form id="bookForm" name="bookForm">
                             <div class="row">
                                 <div class="form-group">
-                                    <label for="timeId" class="form-label">Chọn thời gian:</label>
-<!--                                    for="timeSelect"-->
+                                    <label class="form-label" for="timeId">Chọn thời gian:</label>
+                                    <!--for="timeSelect"-->
                                     <select id="timeId">
                                         {% for t in time %}
-                                        <option value="{{ t.id }}" name="time"> {{ t.period }}</option>
+                                        <option name="time" value="{{ t.id }}"> {{ t.period }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <span class="form-label">Pickup Date</span>
-                                        <input class="form-control" name="date" type="date" id="dateId" required>
+                                        <input class="form-control" id="dateId" name="date" required type="date">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <span class="form-label">Mô tả</span>
-                                    <textarea class="form-control" name="desc" id="descId"
+                                    <textarea class="form-control" id="descId" name="desc"
                                               placeholder="Mô tả tình trạng bệnh"></textarea>
                                 </div>
                                 <div class="form-btn">
@@ -50,7 +50,8 @@
 </section>
 {% else %}
 <div class="container">
-    <h3 class="text-center text-info"><a href="/login" class="text-decoration-none "> ĐẶNG NHẬP ĐỂ ĐƯỢC ĐẶT LỊCH KHÁM </a>
+    <h3 class="text-center text-info"><a class="text-decoration-none " href="/login"> ĐẶNG NHẬP ĐỂ ĐƯỢC ĐẶT LỊCH
+        KHÁM </a>
     </h3>
 </div>
 {% endif %}
